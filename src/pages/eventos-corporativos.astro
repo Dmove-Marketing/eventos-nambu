@@ -1,0 +1,326 @@
+---
+// Gerado a partir de: eventos-corporativos.html
+import Base from '../layouts/Base.astro';
+import config from '../../config.json';
+import LeadForm from '../components/forms/LeadForm.astro';
+import '../styles/eventos-corporativos.css';
+---
+
+<Base
+  title="Nambu Eventos – Alta gastronomia para eventos corporativos"
+  description="Catering de alta gastronomia para eventos corporativos em São Paulo: confraternizações, coffee breaks, workshops e jantares com ingredientes selecionados."
+  ogImage="/images/og-eventos-corporativos.jpg"
+  canonical="https://espaco.nambueventos.com/eventos-corporativos"
+  whatsAppMessage="Olá! Como posso ajudar você a planejar seu evento corporativo com a gastronomia Nambu?\nPreencha os campos abaixo e vamos conversar no WhatsApp."
+  whatsAppStep1Fields={[
+    { name: 'data', type: 'date', label: 'Data do evento', required: false },
+    { name: 'pessoas', type: 'number', label: 'Número de pessoas', placeholder: 'Ex: 80', required: false },
+    { name: 'tipo', type: 'select', label: 'Tipo de evento', required: false, options: [
+      { value: '', label: 'Selecione', disabled: false, selected: true },
+      { value: 'Confraternização Corporativa', label: 'Confraternização Corporativa' },
+      { value: 'Coffee Break & Brunch', label: 'Coffee Break & Brunch' },
+      { value: 'Workshop / Treinamento', label: 'Workshop / Treinamento' },
+      { value: 'Jantar Corporativo', label: 'Jantar Corporativo' },
+      { value: 'Evento de Networking', label: 'Evento de Networking' },
+      { value: 'Outro', label: 'Outro' }
+    ] }
+  ]}
+>
+<!-- ============ HEADER ============ -->
+<header>
+  <nav class="nav">
+    <a class="nav__logo" href="#top">
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/casanambu-FINAL-07-e1724342755171-1536x200-2.webp" alt="Nambu Eventos" fetchpriority="high" loading="eager" />
+    </a>
+    <div class="nav__menu-links">
+      <div class="nav__links">
+        <a href="#sobre">Sobre</a>
+        <a href="#gastronomia">Gastronomia</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#solucoes">Soluções</a>
+      </div>
+    </div>
+    <a class="btn btn--gold nav__cta" href="#contato">Solicitar orçamento</a>
+    <button class="nav__burger" id="navBurger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+  <div class="nav__mobile" id="navMobile" aria-hidden="true">
+    <a href="#sobre" class="nav__mobile-link">Sobre</a>
+    <a href="#gastronomia" class="nav__mobile-link">Gastronomia</a>
+    <a href="#eventos" class="nav__mobile-link">Eventos</a>
+    <a href="#solucoes" class="nav__mobile-link">Soluções</a>
+    <a class="btn btn--gold nav__mobile-cta" href="#contato">Solicitar orçamento</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/hero-corporativos.webp" alt="Alta gastronomia Nambu Eventos" class="hero__bg" fetchpriority="high" loading="eager" />
+  <div class="container">
+    <div class="hero__inner reveal">
+      <h1>Alta gastronomia para eventos corporativos que pedem excelência</h1>
+      <p>Há mais de 15 anos oferecendo catering para empresas que não abrem mão de uma experiência completa para colaboradores, parceiros e clientes.</p>
+      <a class="btn btn--gold" href="#contato">Solicitar orçamento personalizado</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE ============ -->
+<section class="section section--cream" id="sobre">
+  <div class="container split">
+    <div class="split__img reveal">
+      <div class="about-carousel">
+        <div class="about-carousel__track" id="aboutTrack">
+          <div class="about-carousel__item active"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/sobre-01.webp" alt="Catering Nambu Eventos — Prato principal" loading="lazy" /></div>
+          <div class="about-carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/sobre-02.webp" alt="Catering Nambu Eventos — Buffets" loading="lazy" /></div>
+          <div class="about-carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/sobre-03.webp" alt="Catering Nambu Eventos — Entrada" loading="lazy" /></div>
+        </div>
+        <div class="about-carousel__dots">
+          <span class="about-carousel__dot active" data-index="0"></span>
+          <span class="about-carousel__dot" data-index="1"></span>
+          <span class="about-carousel__dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Sobre a Nambu</span>
+      <h2>O cuidado da nossa <br>equipe, para a sua</h2>
+      <p>A Nambu nasceu da convicção de que uma boa mesa começa na origem dos ingredientes. Trabalhamos lado a lado com pequenos produtores e selecionamos itens orgânicos, livres de agrotóxicos, para criar cardápios autorais que celebram frescor e sabor. Cada confraternização, coffee break, workshop ou jantar é conduzido por uma equipe especializada e uma operação completa, que acompanha tudo do primeiro planejamento ao último prato servido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GASTRONOMIA ============ -->
+<section class="section section--dark" id="gastronomia">
+  <div class="container">
+    <div class="gastro-head reveal">
+      <span class="eyebrow">Gastronomia</span>
+      <h2>O sabor da excelência <br>em cada detalhe</h2>
+      <p>Mais do que servir refeições, transformamos cardápios em momentos que aproximam equipes, estimulam conexões genuínas e fazem cada colaborador se sentir valorizado.</p>
+    </div>
+
+    <div class="carousel reveal">
+      <div class="carousel__track" id="gastroTrack">
+        <div class="carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/Gastronomia-01.webp" alt="Coffee Break & Brunch" loading="lazy" /></div>
+        <div class="carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/Gastronomia-02.webp" alt="Confraternizações" loading="lazy" /></div>
+        <div class="carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/Gastronomia-03.webp" alt="Jantares" loading="lazy" /></div>
+        <div class="carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/Gastronomia-04.webp" alt="Workshops" loading="lazy" /></div>
+        <div class="carousel__item"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/Gastronomia-05.webp" alt="Ilhas gastronômicas" loading="lazy" /></div>
+      </div>
+      <div class="carousel__nav">
+        <button class="carousel__btn" id="gastroPrev" aria-label="Anterior">‹</button>
+        <button class="carousel__btn" id="gastroNext" aria-label="Próximo">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPOS DE EVENTOS ============ -->
+<section class="section section--cream" id="eventos">
+  <div class="container">
+    <div class="events-head reveal">
+      <span class="eyebrow">Tipos de eventos</span>
+      <h1>Para cada ocasião, <br>uma forma de servir</h1>
+    </div>
+
+    <div class="events-grid">
+      <article class="event-card reveal">
+        <div class="event-card__img"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/eventos-confraternizaÃ§Ãµes.webp" alt="Confraternizações Corporativas" loading="lazy" /></div>
+        <div class="event-card__body">
+          <h2>Confraternizações Corporativas</h2>
+          <p>Celebre conquistas com cardápios autorais, ingredientes selecionados e uma equipe dedicada a cuidar de cada etapa do encontro.</p>
+        </div>
+      </article>
+
+      <article class="event-card reveal">
+        <div class="event-card__img"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/eventos-coffee.webp" alt="Coffee Break & Brunch Profissional" loading="lazy" /></div>
+        <div class="event-card__body">
+          <h2>Coffee Break &amp; Brunch Profissional</h2>
+          <p>Opções frescas e cuidadosamente preparadas para receber colaboradores e convidados com praticidade, organização e alto padrão de apresentação.</p>
+        </div>
+      </article>
+
+      <article class="event-card reveal">
+        <div class="event-card__img"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/eventos-workshops.webp" alt="Workshops e Treinamentos" loading="lazy" /></div>
+        <div class="event-card__body">
+          <h2>Workshops e Treinamentos</h2>
+          <p>Combinações equilibradas que acompanham o ritmo da programação e contribuem para momentos mais produtivos ao longo do dia.</p>
+        </div>
+      </article>
+
+      <article class="event-card reveal">
+        <div class="event-card__img"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/eventos-jantares.webp" alt="Jantares Corporativos" loading="lazy" /></div>
+        <div class="event-card__body">
+          <h2>Jantares Corporativos</h2>
+          <p>Receba clientes, parceiros e lideranças com uma proposta sofisticada, elaborada para valorizar cada ocasião e fortalecer relacionamentos.</p>
+        </div>
+      </article>
+
+      <article class="event-card reveal event-card--full">
+        <div class="event-card__split">
+          <div class="event-card__img"><img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/eventos-networking.webp" alt="Eventos de Networking" loading="lazy" /></div>
+          <div class="event-card__body">
+            <h2>Eventos de Networking</h2>
+            <p>Finger foods, ilhas gastronômicas e atendimento ágil para incentivar a circulação dos convidados e tornar as interações mais naturais.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SOLUÇÕES ============ -->
+<section class="section section--dark" id="solucoes">
+  <div class="container">
+    <div class="sol-head reveal">
+      <span class="eyebrow">Soluções</span>
+      <h1>A arte de receber bem</h1>
+      <p>Da concepção à entrega, cada etapa é planejada para garantir fluidez, consistência e tranquilidade na realização do seu projeto.</p>
+    </div>
+
+    <div class="sol-grid">
+      <div class="sol-card reveal">
+        <div class="sol-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4z"/><path d="M4 14h7v6H4z"/><path d="M15 14h5v6h-5z"/></svg></div>
+        <h2>Formatos Versáteis</h2>
+        <p>Estações temáticas, porções para circulação e composições completas permitem adequar a proposta às necessidades de cada público.</p>
+      </div>
+
+      <div class="sol-card reveal">
+        <div class="sol-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 7h10c0-2 2-4 2-7a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg></div>
+        <h2>Escolhas Inclusivas</h2>
+        <p>Alternativas plant-based e adaptações alimentares ampliam as possibilidades e contemplam diferentes preferências à mesa.</p>
+      </div>
+
+      <div class="sol-card reveal">
+        <div class="sol-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M15 20c0-2 1.5-3.5 4-3.5"/></svg></div>
+        <h2>Time Qualificado</h2>
+        <p>Cozinheiros, auxiliares e profissionais de salão preparados para conduzir todas as etapas com eficiência e discrição.</p>
+      </div>
+
+      <div class="sol-card reveal">
+        <div class="sol-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>Organização Impecável</h2>
+        <p>Ambientes preservados durante toda a programação, com atenção permanente aos detalhes e ao bom funcionamento da estrutura.</p>
+      </div>
+
+      <div class="sol-card reveal">
+        <div class="sol-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h18l-2 8H5z"/><path d="M12 11V6"/><path d="M8 6h8"/></svg></div>
+        <h2>Estrutura Completa</h2>
+        <p>Levamos todo o material necessário, como réchauds, talheres de inox, pratos de porcelana branca e taças para refrigerante, água e suco.</p>
+      </div>
+
+      <div class="sol-card reveal" style="display:flex;flex-direction:column;justify-content:center;background:var(--gold);border-color:var(--gold)">
+        <h2 style="color:#fff">Vamos planejar juntos?</h2>
+        <p style="color:rgba(255,255,255,.9)">Conte com uma operação completa do início ao fim do seu evento.</p>
+        <a class="btn btn--outline" style="margin-top:18px;align-self:flex-start;border-color:#fff;color:#fff" href="#contato">Falar com a Nambu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROVA SOCIAL ============ -->
+<section class="section section--dark">
+  <div class="container proof reveal">
+    <span class="eyebrow">Prova social</span>
+    <h1>Marcas que confiam na Nambu</h1>
+    <div class="logos">
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/01.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/02.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/03.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/04.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/05.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/06.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/07.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/08.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/09.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/10.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/11.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/12.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/13.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/14.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/15.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/16.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/17.webp" alt="Cliente" loading="lazy" />
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/18.webp" alt="Cliente" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO ============ -->
+<section class="section" id="contato">
+  <div class="container contact">
+    <div class="contact__intro reveal">
+      <span class="eyebrow">Contato</span>
+      <h2>Leve o catering da Nambu para sua próxima celebração.</h2>
+      <p>Preencha o formulário para receber uma proposta personalizada para sua empresa.</p>
+      <p class="contact__note">Atendemos apenas em São Paulo</p>
+    </div>
+
+    <LeadForm
+      formId="lead-form"
+      class="form reveal"
+      prefix="contato"
+      project={config.project_slug}
+      submitUrl={config.forms['lead-form'].webhooks[0]}
+      redirectUrl={config.forms['lead-form'].redirect_on_success}
+      submitText="Enviar solicitação"
+      honeypot
+      fields={[
+        { name: 'nome', type: 'text', label: 'Nome', placeholder: 'Seu nome completo', required: true },
+        {
+          type: 'row',
+          fields: [
+            { name: 'telefone', type: 'tel', label: 'WhatsApp', placeholder: '(11) 90000-0000', required: true },
+            { name: 'email', type: 'email', label: 'E-mail', placeholder: 'voce@empresa.com', required: true }
+          ]
+        },
+        {
+          type: 'row',
+          fields: [
+            { name: 'data', type: 'date', label: 'Data do evento', required: false },
+            { name: 'pessoas', type: 'number', label: 'Número de pessoas', placeholder: 'Ex: 80', required: false }
+          ]
+        },
+        { name: 'tipo', type: 'select', label: 'Tipo de evento', required: false, options: [
+          { value: '', label: 'Selecione', disabled: false, selected: true },
+          { value: 'Confraternização Corporativa', label: 'Confraternização Corporativa' },
+          { value: 'Coffee Break & Brunch', label: 'Coffee Break & Brunch' },
+          { value: 'Workshop / Treinamento', label: 'Workshop / Treinamento' },
+          { value: 'Jantar Corporativo', label: 'Jantar Corporativo' },
+          { value: 'Evento de Networking', label: 'Evento de Networking' },
+          { value: 'Outro', label: 'Outro' }
+        ] },
+        { name: 'detalhes', type: 'textarea', label: 'Detalhes adicionais', placeholder: 'Conte um pouco sobre o seu evento...', required: false }
+      ]}
+    />
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer__inner">
+    <span class="footer__copy">Copyright © 2026 Nambu Eventos — Todos os direitos reservados</span>
+    <a class="footer__brand" href="#top" aria-label="Nambu Eventos">
+      <img src="https://media.dmove.com.br/clients/Eventos-Nambu/photos/casanambu-FINAL-07-e1724342755171-1536x200-2.webp" alt="Nambu Eventos" loading="lazy" />
+    </a>
+    <div class="footer__dev">
+      <span>Desenvolvido por</span>
+      <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer" aria-label="Dmove Marketing Digital">
+        <img
+          src="https://dmove.com.br/wp-content/webp-express/webp-images/uploads/2024/01/Logotipo.png.webp"
+          alt="Dmove Marketing Digital"
+          loading="lazy"
+        />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+</Base>
+<script>
+  import '../scripts/eventos-corporativos.js';
+</script>

@@ -35,6 +35,8 @@ export function initForms() {
       return;
     }
 
+    const submitBtn = form.querySelector<HTMLButtonElement>('.form-submit, [type="submit"], [type="button"]');
+
     form.addEventListener('focusin', () => {
       if (!started) {
         started = true;
@@ -42,9 +44,10 @@ export function initForms() {
       }
     });
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
+    // Envio disparado por click/Enter (não pelo evento `submit` nativo) para que o
+    // listener de captura do GTM (Form Submission trigger) não dispare gtm.formSubmit
+    // em cliques que falham na validação abaixo.
+    const handleSubmit = async () => {
       const hp = form.querySelector<HTMLInputElement>('[name="website"]');
       if (hp && hp.value) return;
 
@@ -73,13 +76,48 @@ export function initForms() {
         }
       });
 
+      // Validação de formato: email
+      form.querySelectorAll<HTMLInputElement>('input[type="email"]').forEach((field) => {
+        if (!field.value) return; // campo vazio já capturado pelo required acima
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(field.value);
+        if (!ok) {
+          isValid = false;
+          (field as HTMLElement).style.borderColor = '#ef4444';
+          (field as HTMLElement).style.outline = '2px solid #ef4444';
+          if (!firstInvalid) firstInvalid = field;
+          const clear = () => {
+            (field as HTMLElement).style.removeProperty('border-color');
+            (field as HTMLElement).style.removeProperty('outline');
+            field.removeEventListener('input', clear);
+          };
+          field.addEventListener('input', clear);
+        }
+      });
+
+      // Validação de formato: telefone (mínimo 10 dígitos — DDD + número)
+      form.querySelectorAll<HTMLInputElement>('[name="telefone"]').forEach((field) => {
+        if (!field.value) return;
+        const digits = field.value.replace(/\D/g, '');
+        if (digits.length < 10) {
+          isValid = false;
+          (field as HTMLElement).style.borderColor = '#ef4444';
+          (field as HTMLElement).style.outline = '2px solid #ef4444';
+          if (!firstInvalid) firstInvalid = field;
+          const clear = () => {
+            (field as HTMLElement).style.removeProperty('border-color');
+            (field as HTMLElement).style.removeProperty('outline');
+            field.removeEventListener('input', clear);
+          };
+          field.addEventListener('input', clear);
+        }
+      });
+
       if (!isValid) {
         firstInvalid!.scrollIntoView({ behavior: 'smooth', block: 'center' });
         (firstInvalid as HTMLElement).focus();
         return;
       }
 
-      const submitBtn  = form.querySelector<HTMLButtonElement>('.form-submit, [type="submit"]');
       const btnText    = submitBtn?.querySelector<HTMLElement>('.btn-text');
       const btnLoading = submitBtn?.querySelector<HTMLElement>('.btn-loading');
 
@@ -111,22 +149,26 @@ export function initForms() {
       const dateStr = now.toLocaleDateString('pt-BR');
       const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
+      const getFieldLabel = (name: string): string => {
+        const field = form.querySelector<HTMLElement>(`[name="${name}"]`);
+        const label = field?.id ? form.querySelector<HTMLLabelElement>(`label[for="${field.id}"]`) : null;
+        return label?.textContent?.trim() || (name.charAt(0).toUpperCase() + name.slice(1));
+      };
+
       const capitalizedFields: Record<string, string> = {};
-      let fonteBase = rawData['fonte'] || project;
+      let fonteBase = rawData['fonte'] || `${window.location.origin}${window.location.pathname}`;
       Object.entries(rawData).forEach(([key, val]) => {
         if (key === 'fonte') return;
-        const capKey = key.charAt(0).toUpperCase() + key.slice(1);
-        capitalizedFields[capKey] = val;
+        capitalizedFields[getFieldLabel(key)] = val;
       });
 
-      const trackingParamKeys = [
-        'utm_source', 'utm_medium', 'utm_campaign', 'utm_term',
-        'utm_content', 'utm_id', 'gclid', 'gbraid', 'wbraid',
-        'fbclid', 'ttclid', 'msclkid', 'sck',
-        'fbc', 'fbp', 'external_id', 'event_id',
-      ];
+      // Fonte = URL da página + todos os UTMs/click IDs capturados na sessão
+      // (não só uma lista fixa — qualquer utm_* customizado também entra).
+      const clickIdKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'ttclid', 'msclkid', 'sck'];
       const qs = new URLSearchParams();
-      trackingParamKeys.forEach(k => { if (tracking[k]) qs.set(k, tracking[k]); });
+      Object.entries(tracking).forEach(([k, v]) => {
+        if (v && (k.startsWith('utm_') || clickIdKeys.includes(k))) qs.set(k, v);
+      });
       const fonte = qs.toString() ? `${fonteBase}?${qs.toString()}` : fonteBase;
 
       // Campos Meta CAPI — enviados também como campos flat para uso direto no n8n
@@ -204,6 +246,16 @@ export function initForms() {
           }
         }
       }
+    };
+
+    submitBtn?.addEventListener('click', handleSubmit);
+
+    form.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'TEXTAREA' || target.tagName === 'BUTTON') return;
+      e.preventDefault();
+      handleSubmit();
     });
   });
 }

@@ -5,18 +5,14 @@
   (function() {
     const params = new URLSearchParams(window.location.search);
 
-    const utmKeys = [
-      'utm_source', 'utm_medium', 'utm_campaign',
-      'utm_content', 'utm_term'
-    ];
-
-    const clickIdKeys = ['gclid', 'fbclid', 'sck', 'ttclid', 'msclkid'];
+    // Captura qualquer parâmetro utm_* (não só os padrão), para não perder
+    // UTMs customizados que a campanha venha a usar.
+    const clickIdKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'ttclid', 'msclkid', 'sck'];
 
     const trackingData: Record<string, string> = {};
 
-    utmKeys.forEach(key => {
-      const value = params.get(key);
-      if (value) trackingData[key] = value;
+    params.forEach((value, key) => {
+      if (value && key.toLowerCase().startsWith('utm_')) trackingData[key] = value;
     });
 
     clickIdKeys.forEach(key => {
@@ -35,7 +31,7 @@
       sessionStorage.setItem('dmove_first_visit', new Date().toISOString());
     }
 
-    const hasNewParams = utmKeys.some(k => trackingData[k]) || clickIdKeys.some(k => trackingData[k]);
+    const hasNewParams = Object.keys(trackingData).some(k => k.startsWith('utm_') || clickIdKeys.includes(k));
     if (hasNewParams) {
       sessionStorage.setItem('dmove_tracking', JSON.stringify(trackingData));
     }
