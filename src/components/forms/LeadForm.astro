@@ -10,6 +10,8 @@ interface Field {
   name: string;
   type: 'text' | 'email' | 'tel' | 'number' | 'select' | 'textarea' | 'hidden' | 'radio' | 'date';
   label?: string;
+  /** Nome enviado ao webhook (n8n) no lugar do label visível, quando informado. */
+  webhookLabel?: string;
   placeholder?: string;
   required?: boolean;
   full?: boolean;
@@ -129,20 +131,20 @@ const groupCls  = (full?: boolean) => {
               <div class={groupCls(f.full)}>
                 {f.label && <label class={cxLabel} for={f.id ?? f.name}>{f.label}</label>}
                 {f.type === 'select' ? (
-                  <select class={cxSelect} name={f.name} id={f.id ?? f.name} required={f.required}>
+                  <select class={cxSelect} name={f.name} id={f.id ?? f.name} required={f.required} data-webhook-label={f.webhookLabel}>
                     {f.options?.map((opt) => (
                       <option value={opt.value} disabled={opt.disabled} selected={opt.selected}>{opt.label}</option>
                     ))}
                   </select>
                 ) : f.type === 'textarea' ? (
-                  <textarea class={cxArea} name={f.name} id={f.id ?? f.name} rows={f.rows ?? 4} placeholder={f.placeholder} required={f.required}></textarea>
+                  <textarea class={cxArea} name={f.name} id={f.id ?? f.name} rows={f.rows ?? 4} placeholder={f.placeholder} required={f.required} data-webhook-label={f.webhookLabel}></textarea>
                 ) : f.type === 'hidden' ? (
                   <input type="hidden" name={f.name} id={f.id ?? f.name} value={f.value} />
                 ) : f.type === 'radio' ? (
                   <div class={cxRadioGroup}>
                     {f.options?.map((opt) => (
                       <label class={cxRadioLabel}>
-                        <input type="radio" name={f.name} value={opt.value} required={f.required} />
+                        <input type="radio" name={f.name} value={opt.value} required={f.required} data-webhook-label={f.webhookLabel} />
                         <span>{opt.label}</span>
                       </label>
                     ))}
@@ -162,6 +164,7 @@ const groupCls  = (full?: boolean) => {
                     min={f.min}
                     max={f.max}
                     readonly={f.readonly}
+                    data-webhook-label={f.webhookLabel}
                   />
                 )}
                 {f.errorText && <span class={cxError} id={f.errorId}>{f.errorText}</span>}
@@ -181,18 +184,18 @@ const groupCls  = (full?: boolean) => {
         <div class={groupCls(f.full)}>
           {f.label && <label class={cxLabel} for={f.id ?? f.name}>{f.label}</label>}
           {f.type === 'select' ? (
-            <select class={cxSelect} name={f.name} id={f.id ?? f.name} required={f.required}>
+            <select class={cxSelect} name={f.name} id={f.id ?? f.name} required={f.required} data-webhook-label={f.webhookLabel}>
               {f.options?.map((opt) => (
                 <option value={opt.value} disabled={opt.disabled} selected={opt.selected}>{opt.label}</option>
               ))}
             </select>
           ) : f.type === 'textarea' ? (
-            <textarea class={cxArea} name={f.name} id={f.id ?? f.name} rows={f.rows ?? 4} placeholder={f.placeholder} required={f.required}></textarea>
+            <textarea class={cxArea} name={f.name} id={f.id ?? f.name} rows={f.rows ?? 4} placeholder={f.placeholder} required={f.required} data-webhook-label={f.webhookLabel}></textarea>
           ) : f.type === 'radio' ? (
             <div class={cxRadioGroup}>
               {f.options?.map((opt) => (
                 <label class={cxRadioLabel}>
-                  <input type="radio" name={f.name} value={opt.value} required={f.required} />
+                  <input type="radio" name={f.name} value={opt.value} required={f.required} data-webhook-label={f.webhookLabel} />
                   <span>{opt.label}</span>
                 </label>
               ))}
@@ -212,6 +215,7 @@ const groupCls  = (full?: boolean) => {
               min={f.min}
               max={f.max}
               readonly={f.readonly}
+              data-webhook-label={f.webhookLabel}
             />
           )}
           {f.errorText && <span class={cxError} id={f.errorId}>{f.errorText}</span>}

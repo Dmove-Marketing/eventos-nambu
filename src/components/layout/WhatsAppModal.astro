@@ -18,6 +18,8 @@ interface Step1Field {
   name: string;
   type: 'text' | 'email' | 'tel' | 'number' | 'select' | 'textarea' | 'date' | 'radio';
   label?: string;
+  /** Nome enviado ao webhook (n8n) e na mensagem do WhatsApp no lugar do label visível, quando informado. */
+  webhookLabel?: string;
   placeholder?: string;
   required?: boolean;
   options?: FieldOption[];
@@ -68,7 +70,7 @@ const welcomeLines = welcomeMessage.split('\n');
 // Mapa nome-do-campo → label legível para a mensagem do WhatsApp
 const fieldLabels: Record<string, string> = { nome: 'Nome', email: 'E-mail', telefone: 'WhatsApp' };
 step1Fields.forEach(f => {
-  fieldLabels[f.name] = f.label || f.placeholder || (f.name.charAt(0).toUpperCase() + f.name.slice(1).replace(/_/g, ' '));
+  fieldLabels[f.name] = f.webhookLabel || f.label || f.placeholder || (f.name.charAt(0).toUpperCase() + f.name.slice(1).replace(/_/g, ' '));
 });
 ---
 

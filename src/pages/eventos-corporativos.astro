@@ -14,7 +14,7 @@ import '../styles/eventos-corporativos.css';
   whatsAppMessage="Olá! Como posso ajudar você a planejar seu evento corporativo com a gastronomia Nambu?\nPreencha os campos abaixo e vamos conversar no WhatsApp."
   whatsAppStep1Fields={[
     { name: 'data', type: 'date', label: 'Data do evento', required: false },
-    { name: 'pessoas', type: 'number', label: 'Número de pessoas', placeholder: 'Ex: 80', required: false },
+    { name: 'pessoas', type: 'number', label: 'Número de pessoas', webhookLabel: 'Convidados', placeholder: 'Ex: 80', required: false },
     { name: 'tipo', type: 'select', label: 'Tipo de evento', required: false, options: [
       { value: '', label: 'Selecione', disabled: false, selected: true },
       { value: 'Confraternização Corporativa', label: 'Confraternização Corporativa' },
@@ -281,7 +281,7 @@ import '../styles/eventos-corporativos.css';
           type: 'row',
           fields: [
             { name: 'data', type: 'date', label: 'Data do evento', required: false },
-            { name: 'pessoas', type: 'number', label: 'Número de pessoas', placeholder: 'Ex: 80', required: false }
+            { name: 'pessoas', type: 'number', label: 'Número de pessoas', webhookLabel: 'Convidados', placeholder: 'Ex: 80', required: false }
           ]
         },
         { name: 'tipo', type: 'select', label: 'Tipo de evento', required: false, options: [

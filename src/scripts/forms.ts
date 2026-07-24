@@ -151,6 +151,7 @@ export function initForms() {
 
       const getFieldLabel = (name: string): string => {
         const field = form.querySelector<HTMLElement>(`[name="${name}"]`);
+        if (field?.dataset.webhookLabel) return field.dataset.webhookLabel;
         const label = field?.id ? form.querySelector<HTMLLabelElement>(`label[for="${field.id}"]`) : null;
         return label?.textContent?.trim() || (name.charAt(0).toUpperCase() + name.slice(1));
       };
