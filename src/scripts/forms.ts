@@ -44,6 +44,9 @@ export function initForms() {
       }
     });
 
+    // Impede navegação quando o submit nativo é disparado manualmente abaixo (após validação).
+    form.addEventListener('submit', (e) => e.preventDefault());
+
     // Envio disparado por click/Enter (não pelo evento `submit` nativo) para que o
     // listener de captura do GTM (Form Submission trigger) não dispare gtm.formSubmit
     // em cliques que falham na validação abaixo.
@@ -117,6 +120,10 @@ export function initForms() {
         (firstInvalid as HTMLElement).focus();
         return;
       }
+
+      // Dispara submit nativo para o GTM (Form Submission trigger) capturar o Form ID.
+      // O listener acima chama preventDefault(), então não há navegação.
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
 
       const btnText    = submitBtn?.querySelector<HTMLElement>('.btn-text');
       const btnLoading = submitBtn?.querySelector<HTMLElement>('.btn-loading');

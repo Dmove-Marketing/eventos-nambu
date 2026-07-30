@@ -13,6 +13,7 @@ import '../styles/eventos-corporativos.css';
   canonical="https://espaco.nambueventos.com/eventos-corporativos"
   whatsAppMessage="Olá! Como posso ajudar você a planejar seu evento corporativo com a gastronomia Nambu?\nPreencha os campos abaixo e vamos conversar no WhatsApp."
   whatsAppStep1Fields={[
+    { name: 'empresa', type: 'text', label: 'Nome da empresa', webhookLabel: 'Empresa', placeholder: 'Nome da sua empresa', required: true },
     { name: 'data', type: 'date', label: 'Data do evento', required: false },
     { name: 'pessoas', type: 'number', label: 'Número de pessoas', webhookLabel: 'Convidados', placeholder: 'Ex: 80', required: false },
     { name: 'tipo', type: 'select', label: 'Tipo de evento', required: false, options: [
@@ -269,7 +270,13 @@ import '../styles/eventos-corporativos.css';
       submitText="Enviar solicitação"
       honeypot
       fields={[
-        { name: 'nome', type: 'text', label: 'Nome', placeholder: 'Seu nome completo', required: true },
+        {
+          type: 'row',
+          fields: [
+            { name: 'nome', type: 'text', label: 'Nome', placeholder: 'Seu nome completo', required: true },
+            { name: 'empresa', type: 'text', label: 'Nome da empresa', webhookLabel: 'Empresa', placeholder: 'Nome da sua empresa', required: true }
+          ]
+        },
         {
           type: 'row',
           fields: [
