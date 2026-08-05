@@ -9,6 +9,8 @@ interface WhatsAppStep1Field {
   name: string;
   type: 'text' | 'email' | 'tel' | 'number' | 'select' | 'textarea' | 'date' | 'radio';
   label?: string;
+  /** Nome enviado ao webhook (n8n) e na mensagem do WhatsApp no lugar do label visível, quando informado. */
+  webhookLabel?: string;
   placeholder?: string;
   required?: boolean;
   options?: { value: string; label: string; disabled?: boolean; selected?: boolean }[];

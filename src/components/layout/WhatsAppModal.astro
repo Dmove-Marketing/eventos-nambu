@@ -68,7 +68,7 @@ const projectSlug = config.project_slug || '';
 const welcomeLines = welcomeMessage.split('\n');
 
 // Mapa nome-do-campo → label legível para a mensagem do WhatsApp
-const fieldLabels: Record<string, string> = { nome: 'Nome', email: 'E-mail', telefone: 'WhatsApp' };
+const fieldLabels: Record<string, string> = { nome: 'Nome', empresa: 'Empresa', email: 'E-mail', telefone: 'WhatsApp' };
 step1Fields.forEach(f => {
   fieldLabels[f.name] = f.webhookLabel || f.label || f.placeholder || (f.name.charAt(0).toUpperCase() + f.name.slice(1).replace(/_/g, ' '));
 });
@@ -141,6 +141,10 @@ step1Fields.forEach(f => {
             <div class="wa-form-group">
               <label class="wa-label" for="wa-nome">Nome completo</label>
               <input type="text" name="nome" id="wa-nome" placeholder="Como você se chama?" required class="wa-input" autocomplete="name" />
+            </div>
+            <div class="wa-form-group">
+              <label class="wa-label" for="wa-empresa">Nome da empresa</label>
+              <input type="text" name="empresa" id="wa-empresa" placeholder="Nome da sua empresa" required class="wa-input" autocomplete="organization" />
             </div>
             <div class="wa-form-group">
               <label class="wa-label" for="wa-email">E-mail</label>
