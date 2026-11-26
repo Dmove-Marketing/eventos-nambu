@@ -239,6 +239,14 @@ step1Fields.forEach(f => {
 
     </div>
   </div>
+
+  <!-- Espelho das respostas para o GTM (Enhanced Conversions lê nome/telefone/e-mail daqui quando form_source = whatsapp).
+       Fica fora do form visível porque o closeModal() faz form.reset() logo após o envio. -->
+  <form data-wa-form hidden aria-hidden="true" onsubmit="return false">
+    <input type="hidden" name="Nome" id="wa-popup-nome" />
+    <input type="hidden" name="WhatsApp" id="wa-popup-telefone" />
+    <input type="hidden" name="E-mail" id="wa-popup-email" />
+  </form>
 </div>
 )}
 
@@ -432,8 +440,16 @@ step1Fields.forEach(f => {
         console.error('[WhatsApp Form Error]', err);
       }
 
+      // preenche o espelho antes do push: o GTM lê a PII do DOM, não do dataLayer
+      const espelho = document.querySelector('[data-wa-form]');
+      if (espelho) {
+        espelho.querySelector('[name="Nome"]').value = data.nome || '';
+        espelho.querySelector('[name="WhatsApp"]').value = data.telefone || '';
+        espelho.querySelector('[name="E-mail"]').value = data.email || '';
+      }
+
       if (window.dataLayer) {
-        window.dataLayer.push({ event: 'form_submit', form_id: 'form_whatsapp', project: projectSlug, ...capitalized });
+        window.dataLayer.push({ event: 'form_submit', form_source: 'whatsapp', form_id: 'form_whatsapp', project: projectSlug, ...capitalized });
       }
 
       // Mensagem WhatsApp construída dinamicamente a partir dos campos
